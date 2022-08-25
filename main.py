@@ -7,7 +7,7 @@ import ClassDefinition
 root = Tk()
 root.title('Generate Your Character')
 root.iconbitmap("c:/testicon.ico")
-root.geometry('400x400')
+root.geometry('600x500')
 
 
 # Function to get data from entries
@@ -16,7 +16,7 @@ def result():
     # First Confirm that all info is in place
     try:
         new_char = ClassDefinition.Character(character_name.get(),  player_name.get(), char_class.get(),
-                                             background.get(), h.get())
+                                             background.get(), h.get(), stats.get())
         # print(new_char)
     except KeyError:
         return
@@ -33,8 +33,8 @@ def result():
             skillframe.destroy()
 
     # Build frame for choosing proficiencies
-    skillframe = LabelFrame(root, text='Select your skills', padx=5, pady=10)
-    skillframe.grid(row=6, column=0)
+    skillframe = LabelFrame(root, text=f'Choose up to {new_char.class_skill_number} proficiencies', padx=5, pady=10)
+    skillframe.grid(row=9, column=0)
 
     # Listbox for applicable profs
     profs = [p for p in charclasses.classes[new_char.charclass]['skill proficiencies'] if p not in new_char.skill_proficiencies]
@@ -43,7 +43,7 @@ def result():
     lb.grid(row=1, column=0)
 
     # Create button for saving profs
-    save_btn = Button(skillframe, text=f'Choose up to {new_char.class_skill_number} proficiencies', command=save_prof)
+    save_btn = Button(skillframe, text=f'Save your character', bg='light green', command=save_prof)
     save_btn.grid(row=1, column=2)
 
 
@@ -77,8 +77,16 @@ char_class = StringVar()
 char_class.set('Classes')
 class_drop = OptionMenu(root, char_class, *charclasses.classes).grid(row=4, column=1)
 
+# Selector for stat choice
+# stat_frame = LabelFrame(root, text="Stat generation").grid(row=6, column=0)
+stat_label = Label(root, text="Select one stat generation method:").grid(row=5, column=0)
+stats = StringVar()
+s1 = Radiobutton(root, variable=stats, text="Recommended", value="Recommended" ).grid(row=6, column=0)
+s2 = Radiobutton(root, variable=stats, text="Random", value="Random" ).grid(row=7, column=0)
+
+
 # Button for gathering results
-result_btn = Button(root, text='Create your character', command=result, bg='orange').grid(row=5, column=0, columnspan=2)
+result_btn = Button(root, text='Next', command=result, bg='yellow').grid(row=8, column=0, columnspan=2)
 
 # Create event Loop:
 # when running a program, it's always looping. when mouse move,input,key input, notices difference in loop

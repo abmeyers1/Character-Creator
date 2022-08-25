@@ -5,7 +5,7 @@ import heritage
 
 
 class Character:
-    def __init__(self, char_name, player_name, char_class, char_back, char_heritage):
+    def __init__(self, char_name, player_name, char_class, char_back, char_heritage, stats):
         self.char_name = char_name
         self.player_name = player_name
         self.heritage = char_heritage
@@ -18,8 +18,8 @@ class Character:
         self.weapon_proficiencies = []
         self.armor_proficiencies = []
         self.set_proficiencies()
-        # self.stats = {}
-        # self.roll_stats()
+        self.stats = {"STR": 0, "DEX": 0, "CON": 0, "INT": 0, "WIS": 0, "CHA": 0}
+        self.roll_stats(stats)
         # self.abilities = []
         # self.abilities.append(self.background['feature'])
         # self.gear = {}
@@ -32,13 +32,17 @@ class Character:
         tool_str = ', '.join(self.tool_proficiencies)
         armor_str = ', '.join(self.armor_proficiencies)
         weapon_str = ', '.join(self.weapon_proficiencies)
+        stats_str = ', '.join(self.stats)
 
         # Return description of character
+        
         return f'Your name is {self.player_name} \nYour character is {self.char_name}, ' \
                f'the {self.heritage} {self.charclass} ' \
                f'\nYour background is {self.background}\n' \
                f'Skills:\t {prof_str}\n' \
-               f'Tools:\t{tool_str}\nArmor:\t{armor_str}\nWeapons:\t{weapon_str}'
+               f'Tools:\t{tool_str}\nArmor:\t{armor_str}\nWeapons:\t{weapon_str}\n' \
+               f'Stats: {stats_str}\n' \
+               f'Strength: {self.stats["STR"]} Dexterity: {self.stats["DEX"]} \nConstitution: {self.stats["CON"]} Intelligence: {self.stats["INT"]} \nWisdom: {self.stats["WIS"]} Charisma: {self.stats["CHA"]}'
 
     def set_proficiencies(self):
 
@@ -81,73 +85,61 @@ class Character:
 
 
 
-    def roll_stats(self):
+    def roll_stats(self, stats):
         # uses random to roll for stats
-        saved_rolls = []
-        for i in range(6):
-            roll = []
-            while len(roll)<4:
-                roll.append(random.randint(1,6))
-            # print(roll)
-            roll.remove(min(roll))
-            # print(roll)
-            saved_rolls.append(sum(roll))
-        print(f' You rolled:\t{saved_rolls}')
+        if stats == 'Random':
+            # Roll for stats randomly
+            print("RANDOM ROLLS!")
+            saved_rolls = []
+            for i in range(6):
+                roll = []
+                while len(roll)<4:
+                    roll.append(random.randint(1,6))
+                roll.remove(min(roll))
+                saved_rolls.append(sum(roll))
+            print("Rolls: " + str(saved_rolls))
+            
+            # assign rolls to stats
+            for key, value in self.stats.items():
+                # print(f"Key: {key}")
+                temp = random.choice(saved_rolls)
+                self.stats[key] = temp 
+                saved_rolls.remove(temp)
 
-        # Ask player to create order of stats
-        statlist=['STR','DEX','CON','INT','WIS','CHA']
-        print('What is your character\'s highest stat?\n')
-
-        # List all stats, assign one at a time in decreasing order
-        while len(statlist) != 1:
-            for index in range(len(statlist)):
-                print(f'{index+1}:\t{statlist[index]}')
-
-            # User selects stat to assign highest number to
-            choice = (input('Enter a number:\t'))
-
-            # Confirm that entry is number in range
-            while choice not in [x for x in range(1,len(statlist)+1)]:
-                # If they entered abbreviation, let it pass
-                if choice in statlist:
-                    choice = int(statlist.index(choice) + 1)
-                try:
-                    choice = int(choice)
-                except ValueError:
-                    choice = input('Enter a number to choose your stat:\t')
-                    continue
-                if choice < 1 or choice > len(statlist):
-                    choice = input('Enter a number to choose your stat:\t')
-                    continue
-
-
-            # Assign highest roll to chosen stat, and remove roll & stat from lists
-            self.stats[statlist[choice - 1]] = max(saved_rolls)
-            del statlist[choice - 1]
-            saved_rolls.remove(max(saved_rolls))
-
-            # Loop for rest of stats until 1 left
-            print(f"Stats remaining: {statlist}")
-            print(f"Rolls remaining: {saved_rolls}")
-
-        # Assign remaining stat
-        self.stats[statlist[0]] = saved_rolls[0]
 
 
         #  Need to account for Racial bonuses here before final printout:
 
 
         # Print out final stats:
-        print('Your character\'s stats are: \nSTR: ' + str(self.stats['STR']) + '\nDEX: ' + str(self.stats['DEX']) +
+            # print('Your character\'s stats are: \nSTR: ' + str(self.stats['STR']) + '\nDEX: ' + str(self.stats['DEX']) +
+            #   '\nCON: ' + str(self.stats['CON']) + '\nINT: ' + str(self.stats['INT']) + '\nWIS: '
+            #   + str(self.stats['WIS']) + '\nCHA: ' +str(self.stats['CHA']) )
+        else:
+            print("RECOMMENDED ROLLS!")
+            
+            print(backgrounddicts.bgds[self.background])
+            self.stats['STR'] = charclasses.classes[self.charclass]['stat_rec'][0]
+            self.stats['DEX'] = charclasses.classes[self.charclass]['stat_rec'][1]
+            self.stats['CON'] = charclasses.classes[self.charclass]['stat_rec'][2]
+            self.stats['INT'] = charclasses.classes[self.charclass]['stat_rec'][3]
+            self.stats['WIS'] = charclasses.classes[self.charclass]['stat_rec'][4]
+            self.stats['CHA'] = charclasses.classes[self.charclass]['stat_rec'][5]
+
+
+            print('Your character\'s stats are: \nSTR: ' + str(self.stats['STR']) + '\nDEX: ' + str(self.stats['DEX']) +
               '\nCON: ' + str(self.stats['CON']) + '\nINT: ' + str(self.stats['INT']) + '\nWIS: '
               + str(self.stats['WIS']) + '\nCHA: ' +str(self.stats['CHA']) )
-
-        # print(self.stats)
+        
+        # Add heritage bonuses to stats
+        print(type(heritage.heritages[self.heritage]['stat_bonus']))
+        for key, value in heritage.heritages[self.heritage]['stat_bonus'].items():
+            self.stats[key] += value
 
 
 
 
 
 if __name__ == '__main__':
-    jeff=Character('Rognar the Blue','Jefft Stork', 'Paladin','Acolyte', 'Human')
+    jeff=Character('Rognar the Blue','Jefft Stork', 'Bard','Acolyte', 'Human',"Recommended")
     print(jeff)
