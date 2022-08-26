@@ -3,6 +3,7 @@ import backgrounddicts
 import heritage
 import charclasses
 import ClassDefinition
+from processpdf import process
 
 root = Tk()
 root.title('Generate Your Character')
@@ -30,6 +31,7 @@ def result():
             for i in lb.curselection():
                 new_char.skill_proficiencies.append(charclasses.classes[new_char.charclass]['skill proficiencies'][i])
             print(new_char)
+            process(new_char)
             skillframe.destroy()
 
     # Build frame for choosing proficiencies
