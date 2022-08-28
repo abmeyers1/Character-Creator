@@ -20,17 +20,24 @@ def process(character):
                         "Initiative": int(character.stats["DEXmod"]),
                         "ProfBonus": character.ProfBonus,
                         "STR": int(character.stats["STR"]),
-                        "STRmod": int(character.stats["STRmod"]) ,
+                        "STRmod": int(character.stats["STRmod"]),
+                        "ST Strength": int(character.saves["STR"]),
                         "DEX": int(character.stats["DEX"]),
                         "DEXmod ": int(character.stats["DEXmod"]),
+                        "ST Dexterity": int(character.saves["DEX"]),
                         "CON": int(character.stats["CON"]),
                         "CONmod": int(character.stats["CONmod"]) ,
+                        "ST Constitution": int(character.saves["CON"]),
                         "INT": int(character.stats["INT"]),
                         "INTmod": int(character.stats["INTmod"]) ,
+                        "ST Intelligence": int(character.saves["INT"]),
                         "WIS": int(character.stats["WIS"]),
                         "WISmod": int(character.stats["WISmod"]) ,
+                        "ST Wisdom": int(character.saves["WIS"]),
                         "CHA": int(character.stats["CHA"]),
-                        "CHamod": int(character.stats["CHAmod"]) ,}
+                        "CHamod": int(character.stats["CHAmod"]) ,
+                        "ST Charisma": int(character.saves["CHA"]),
+                        }
 
     )
 

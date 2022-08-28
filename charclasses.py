@@ -4,6 +4,7 @@ classes = {
     'Artificer': {
         'skill number': 2,
         'hit_die': 8,
+        'saving_throws':['CON', 'INT'],
         'skill proficiencies': ['Arcana', 'History', 'Investigation', 'Medicine', 'Perception', 'Sleight of Hand'],
         'tool proficiencies': ["Thieves' Tools", "Tinker's Tools", "One type of artisan's tools of your choice"],
         'weapon proficiencies': ['Simple Weapons'],
@@ -13,6 +14,7 @@ classes = {
     'Barbarian': {
         'skill number': 2,
         'hit_die': 12,
+        'saving_throws':['CON', 'STR'],
         'skill proficiencies': ['Animal Handling', 'Athletics', 'Intimidation', 'Nature', 'Perception', 'Survival'],
         'tool proficiencies': [],
         'weapon proficiencies': ['Simple Weapons', 'Martial Weapons'],
@@ -22,6 +24,7 @@ classes = {
     'Bard': {
         'hit_die':8,
         'skill number': 3,
+        'saving_throws':['DEX', 'CHA'],
         'skill proficiencies': ['Acrobatics', 'Animal Handling', 'Arcana', 'Athletics', 'Deception', 'History',
                                 'Insight',
                                 'Intimidation', 'Investigation', 'Medicine', 'Nature', 'Perception', 'Performance',
@@ -35,6 +38,7 @@ classes = {
     'Blood Hunter': {
         'hit_die': 10,
         'skill number': 3,
+        'saving_throws':['DEX', 'INT'],
         'skill proficiencies': ['Athletics', 'Acrobatics', 'Arcana', 'History', 'Insight', 'Investigation', 'Religion',
                                 'Survival'],
         'tool proficiencies': ["Alchemist's supplies"],
@@ -45,6 +49,7 @@ classes = {
     'Cleric': {
         'skill number': 2,
         'hit_die': 8,
+        'saving_throws':['WIS', 'CHA'],
         'skill proficiencies': ['History', 'Insight', 'Medicine', 'Persuasion', 'Religion'],
         'tool proficiencies': [],
         'weapon proficiencies': ['Simple Weapons'],
@@ -54,6 +59,7 @@ classes = {
     'Druid': {
         'skill number': 2,
         'hit_die': 8,
+        'saving_throws':['WIS', 'INT'],
         'skill proficiencies': ['Arcana', 'Animal Handling', 'Insight', 'Medicine', 'Nature', 'Perception', 'Religion',
                                 'Survival'],
         'tool proficiencies': ['Herbalism kit'],
@@ -65,6 +71,7 @@ classes = {
     'Fighter': {
         'skill number': 2,
         'hit_die': 10,
+        'saving_throws':['CON', 'STR'],
         'skill proficiencies': ['Acrobatics', 'Animal Handling', 'Athletics', 'History', 'Insight', 'Intimidation',
                                 'Perception', 'Survival'],
         'tool proficiencies': [],
@@ -75,6 +82,7 @@ classes = {
     'Monk': {
         'skill number': 2,
         'hit_die': 8,
+        'saving_throws':['DEX', 'STR'],
         'skill proficiencies': ['Acrobatics', 'Athletics', 'History', 'Insight', 'Religion', 'Stealth'],
         'tool proficiencies': ["One type of Artisan's tools or one musical instrument"],
         'weapon proficiencies': ['Simple Weapons', 'Shortsword'],
@@ -84,6 +92,7 @@ classes = {
     'Paladin': {
         'skill number': 2,
         'hit_die': 10,
+        'saving_throws':['CHA', 'WIS'],
         'skill proficiencies': ['Athletics', 'Insight', 'Intimidation', 'Medicine', 'Persuasion', 'Religion'],
         'tool proficiencies': [],
         'weapon proficiencies': ['Simple Weapons', 'Martial Weapons'],
@@ -93,6 +102,7 @@ classes = {
     'Ranger': {
         'skill number': 3,
         'hit_die': 10,
+        'saving_throws':['DEX', 'STR'],
         'skill proficiencies': ['Animal Handling', 'Athletics', 'Insight', 'Investigation', 'Nature', 'Perception',
                                 'Stealth', 'Survival'],
         'tool proficiencies': [],
@@ -102,6 +112,7 @@ classes = {
     },
     'Rogue': {
         'skill number': 4,
+        'saving_throws':['DEX', 'INT'],
         'skill proficiencies': ['Acrobatics', 'Deception', 'Insight', 'Intimidation', 'Investigation', 'Perception',
                                 'Performance', 'Persuasion', 'Sleight of Hand', 'Stealth'],
         'tool proficiencies': ["Thieves' Tools"],
@@ -112,6 +123,7 @@ classes = {
     },
     'Sorcerer': {
         'skill number': 2,
+        'saving_throws':['CON', 'CHA'],
         'skill proficiencies': ['Arcana', 'Deceptions', 'Insight', 'Intimidation', 'Persuasion', 'Religion'],
         'tool proficiencies': [],
         'weapon proficiencies': ['Daggers', 'Darts', 'Slings', 'Quarterstaffs', 'Light Crossbows'],
@@ -121,6 +133,7 @@ classes = {
     },
     'Warlock': {
         'skill number': 2,
+        'saving_throws':['CHA', 'WIS'],
         'skill proficiencies': ['Arcana', 'Deception', 'History', 'Intimidation', 'Investigation', 'Nature',
                                 'Religion'],
         'tool proficiencies': [],
@@ -131,6 +144,7 @@ classes = {
     },
     'Wizard': {
         'skill number': 2,
+        'saving_throws':['WIS', 'INT'],
         'skill proficiencies': ['Arcana', 'History', 'Insight', 'Investigation', 'Medicine', 'Religion'],
         'tool proficiencies': [],
         'weapon proficiencies': ['Daggers', 'Darts', 'Slings', 'Quarterstaffs', 'Light Crossbows'],

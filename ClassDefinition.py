@@ -21,7 +21,9 @@ class Character:
         self.armor_proficiencies = []
         self.set_proficiencies()
         self.stats = {"STR": 0, "DEX": 0, "CON": 0, "INT": 0, "WIS": 0, "CHA": 0}
+        self.saves = {"STR": 0, "DEX": 0, "CON": 0, "INT": 0, "WIS": 0, "CHA": 0}
         self.roll_stats(stats)
+        self.saving_throws()
         self.set_hp()
         # self.abilities = []
         # self.abilities.append(self.background['feature'])
@@ -50,8 +52,15 @@ class Character:
     def set_hp(self):
         self.max_hp = self.stats["CONmod"] + charclasses.classes[self.charclass]['hit_die']
 
-
-
+    def saving_throws(self):
+        # Need to add data in charclasses for saving throw proficiencies
+        for stat in self.saves:
+            if stat in charclasses.classes[self.charclass]['saving_throws']:
+                self.saves[stat] = 2 + self.stats[stat+'mod']
+            else:
+                self.saves[stat] = self.stats[stat+ 'mod']
+        
+        
     def set_proficiencies(self):
 
         # Look at background, class, heritage for tool/armor/weapon profs
@@ -87,17 +96,13 @@ class Character:
             self.class_skill_number += heritage.heritages[self.heritage]['skill number']
         except KeyError:
             pass
-        # print('Class skill number:\t' + str(self.class_skill_number))
-        # print('Heritage skill number:\t' + str(self.heritage_skill_number))
-
-
 
 
     def roll_stats(self, stats):
         # uses random to roll for stats
         if stats == 'Random':
             # Roll for stats randomly
-            print("RANDOM ROLLS!")
+            
             saved_rolls = []
             for i in range(6):
                 roll = []
