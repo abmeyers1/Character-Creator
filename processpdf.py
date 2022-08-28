@@ -12,8 +12,22 @@ def process(character):
         writer.pages[0], {"PlayerName": character.player_name, 
                         "ClassLevel": "1", 
                         "CharacterName": character.char_name,
-                        "Background": character.char_back,
-                        "Race" : character.char_heritage}
+                        "Background": character.background,
+                        "Race " : character.heritage,
+                        "Speed": character.speed,
+                        "ProfBonus": character.ProfBonus,
+                        "STR": int(character.stats["STR"]),
+                        "STRmod": int(character.stats["STRmod"]) ,
+                        "DEX": int(character.stats["DEX"]),
+                        "DEXmod ": int(character.stats["DEXmod"]),
+                        "CON": int(character.stats["CON"]),
+                        "CONmod": int(character.stats["CONmod"]) ,
+                        "INT": int(character.stats["INT"]),
+                        "INTmod": int(character.stats["INTmod"]) ,
+                        "WIS": int(character.stats["WIS"]),
+                        "WISmod": int(character.stats["WISmod"]) ,
+                        "CHA": int(character.stats["CHA"]),
+                        "CHamod": int(character.stats["CHAmod"]) ,}
 
     )
 

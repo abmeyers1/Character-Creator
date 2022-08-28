@@ -11,6 +11,8 @@ class Character:
         self.heritage = char_heritage
         self.charclass = char_class
         self.background = char_back
+        self.speed = 30
+        self.ProfBonus = 2
         self.class_skill_number = charclasses.classes[char_class]['skill number']
         self.heritage_skill_number = 0
         self.skill_proficiencies = []
@@ -101,20 +103,12 @@ class Character:
             
             # assign rolls to stats
             for key, value in self.stats.items():
-                # print(f"Key: {key}")
+                
                 temp = random.choice(saved_rolls)
                 self.stats[key] = temp 
                 saved_rolls.remove(temp)
 
 
-
-        #  Need to account for Racial bonuses here before final printout:
-
-
-        # Print out final stats:
-            # print('Your character\'s stats are: \nSTR: ' + str(self.stats['STR']) + '\nDEX: ' + str(self.stats['DEX']) +
-            #   '\nCON: ' + str(self.stats['CON']) + '\nINT: ' + str(self.stats['INT']) + '\nWIS: '
-            #   + str(self.stats['WIS']) + '\nCHA: ' +str(self.stats['CHA']) )
         else:
             print("RECOMMENDED ROLLS!")
             
@@ -126,6 +120,7 @@ class Character:
             self.stats['WIS'] = charclasses.classes[self.charclass]['stat_rec'][4]
             self.stats['CHA'] = charclasses.classes[self.charclass]['stat_rec'][5]
 
+            
 
             print('Your character\'s stats are: \nSTR: ' + str(self.stats['STR']) + '\nDEX: ' + str(self.stats['DEX']) +
               '\nCON: ' + str(self.stats['CON']) + '\nINT: ' + str(self.stats['INT']) + '\nWIS: '
@@ -135,6 +130,14 @@ class Character:
         print(type(heritage.heritages[self.heritage]['stat_bonus']))
         for key, value in heritage.heritages[self.heritage]['stat_bonus'].items():
             self.stats[key] += value
+
+        # Convert Stats to stat modifiers
+        self.stats["STRmod"] = (self.stats["STR"] - 10) // 2
+        self.stats["DEXmod"] = (self.stats["DEX"] - 10) // 2
+        self.stats["CONmod"] = (self.stats["CON"] - 10) // 2
+        self.stats["INTmod"] = (self.stats["INT"] - 10) // 2
+        self.stats["WISmod"] = (self.stats["WIS"] - 10) // 2
+        self.stats["CHAmod"] = (self.stats["CHA"] - 10) // 2
 
 
 

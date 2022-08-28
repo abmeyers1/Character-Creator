@@ -1,5 +1,8 @@
 from PyPDF2 import PdfReader, PdfWriter
 
+# Used for testing PDF filling
+
+
 reader = PdfReader("5E_CharacterSheet_Fillable.pdf")
 writer = PdfWriter()
 
@@ -13,9 +16,9 @@ writer.update_page_form_field_values(
                         "ClassLevel": "1", 
                         "CharacterName": "Bort the wise",
                         "Background": "dog",
-                        'Race ' : "Elf",     # Wrong
+                        'Race ': "Elf",     
                         "Alignment": "Good",
-                        "Speed":30,
+                        "Speed": 30,
                         "STR": 10,
                         "DEX": 10,
                         "CON": 10,
@@ -26,5 +29,5 @@ writer.update_page_form_field_values(
 )
 
 # write "output" to PyPDF2-output.pdf
-with open("filled-out.pdf", "wb") as output_stream:
+with open("filled-out2.pdf", "wb") as output_stream:
     writer.write(output_stream)
