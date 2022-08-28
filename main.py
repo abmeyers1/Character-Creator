@@ -30,7 +30,7 @@ def result():
         else:
             for i in lb.curselection():
                 new_char.skill_proficiencies.append(charclasses.classes[new_char.charclass]['skill proficiencies'][i])
-            print(new_char)
+            # print(new_char)
             process(new_char)
             skillframe.destroy()
 

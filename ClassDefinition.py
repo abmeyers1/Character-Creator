@@ -22,6 +22,7 @@ class Character:
         self.set_proficiencies()
         self.stats = {"STR": 0, "DEX": 0, "CON": 0, "INT": 0, "WIS": 0, "CHA": 0}
         self.roll_stats(stats)
+        self.set_hp()
         # self.abilities = []
         # self.abilities.append(self.background['feature'])
         # self.gear = {}
@@ -45,6 +46,11 @@ class Character:
                f'Tools:\t{tool_str}\nArmor:\t{armor_str}\nWeapons:\t{weapon_str}\n' \
                f'Stats: {stats_str}\n' \
                f'Strength: {self.stats["STR"]} Dexterity: {self.stats["DEX"]} \nConstitution: {self.stats["CON"]} Intelligence: {self.stats["INT"]} \nWisdom: {self.stats["WIS"]} Charisma: {self.stats["CHA"]}'
+
+    def set_hp(self):
+        self.max_hp = self.stats["CONmod"] + charclasses.classes[self.charclass]['hit_die']
+
+
 
     def set_proficiencies(self):
 

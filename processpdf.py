@@ -10,11 +10,14 @@ def process(character):
 
     writer.update_page_form_field_values(
         writer.pages[0], {"PlayerName": character.player_name, 
-                        "ClassLevel": "1", 
+                        "ClassLevel": character.charclass + " 1", 
                         "CharacterName": character.char_name,
                         "Background": character.background,
                         "Race " : character.heritage,
+                        "HPMax": character.max_hp,
+                        "HPCurrent": character.max_hp,
                         "Speed": character.speed,
+                        "Initiative": int(character.stats["DEXmod"]),
                         "ProfBonus": character.ProfBonus,
                         "STR": int(character.stats["STR"]),
                         "STRmod": int(character.stats["STRmod"]) ,
