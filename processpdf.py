@@ -1,4 +1,14 @@
 from PyPDF2 import PdfReader, PdfWriter
+
+skill_list_STR = ['Athletics' ]
+skill_list_DEX = ['Acrobatics', 'SleightofHand', 'Stealth ']
+skill_list_INT = [ 'Arcana', 'History ', 'Investigation ', 'Nature', 'Religion']
+skill_list_WIS = [ 'Animal',  'Insight', 'Medicine', 'Perception ', 'Survival' ]
+skill_list_CHA = [  'Deception ', 'Intimidation', 'Performance', 'Persuasion' ]
+skill_list = [skill_list_STR, skill_list_DEX, skill_list_INT, skill_list_WIS, skill_list_CHA]
+statlist = ['STR','DEX','INT','WIS','CHA']
+
+
 def process(character):
     reader = PdfReader("5E_CharacterSheet_Fillable.pdf")
     writer = PdfWriter()
@@ -9,7 +19,9 @@ def process(character):
     writer.add_page(page)
 
     writer.update_page_form_field_values(
-        writer.pages[0], {"PlayerName": character.player_name, 
+        writer.pages[0], {
+                        # General Attributes
+                        "PlayerName": character.player_name, 
                         "ClassLevel": character.charclass + " 1", 
                         "CharacterName": character.char_name,
                         "Background": character.background,
@@ -19,6 +31,8 @@ def process(character):
                         "Speed": character.speed,
                         "Initiative": int(character.stats["DEXmod"]),
                         "ProfBonus": character.ProfBonus,
+
+                        # Character Stats & Saves
                         "STR": int(character.stats["STR"]),
                         "STRmod": int(character.stats["STRmod"]),
                         "ST Strength": int(character.saves["STR"]),
@@ -37,10 +51,20 @@ def process(character):
                         "CHA": int(character.stats["CHA"]),
                         "CHamod": int(character.stats["CHAmod"]) ,
                         "ST Charisma": int(character.saves["CHA"]),
+
                         }
-
+                    
     )
-
+    for i in range(len(skill_list)):
+        for skill in skill_list[i]:
+            if skill in character.skill_proficiencies:
+                writer.update_page_form_field_values(
+                    writer.pages[0], {skill: character.stats[statlist[i]+'mod'] + 2}
+                )
+            else:
+                writer.update_page_form_field_values(
+                    writer.pages[0], {skill: character.stats[statlist[i]+'mod']}
+                )
     # write "output" to PyPDF2-output.pdf
     with open("filled-out.pdf", "wb") as output_stream:
         writer.write(output_stream)

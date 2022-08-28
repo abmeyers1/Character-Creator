@@ -46,15 +46,15 @@ class Character:
                f'\nYour background is {self.background}\n' \
                f'Skills:\t {prof_str}\n' \
                f'Tools:\t{tool_str}\nArmor:\t{armor_str}\nWeapons:\t{weapon_str}\n' \
-               f'Stats: {stats_str}\n' \
                f'Strength: {self.stats["STR"]} Dexterity: {self.stats["DEX"]} \nConstitution: {self.stats["CON"]} Intelligence: {self.stats["INT"]} \nWisdom: {self.stats["WIS"]} Charisma: {self.stats["CHA"]}'
 
     def set_hp(self):
         self.max_hp = self.stats["CONmod"] + charclasses.classes[self.charclass]['hit_die']
 
     def saving_throws(self):
-        # Need to add data in charclasses for saving throw proficiencies
+        # Update saving throws based on class choice
         for stat in self.saves:
+            # save = stat mod. If save is in class saves, += 2.
             if stat in charclasses.classes[self.charclass]['saving_throws']:
                 self.saves[stat] = 2 + self.stats[stat+'mod']
             else:
