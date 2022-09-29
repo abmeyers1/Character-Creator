@@ -66,7 +66,7 @@ def process(character):
                     writer.pages[0], {skill: character.stats[statlist[i]+'mod']}
                 )
     # write "output" to PyPDF2-output.pdf
-    with open(f"/Sheets/{character.char_name}_Level_1.pdf", "wb") as output_stream:
+    with open(f"./Sheets/{character.char_name}_Level_1.pdf", "wb") as output_stream:
         writer.write(output_stream)
     return
 # process('h')
