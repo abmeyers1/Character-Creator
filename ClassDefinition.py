@@ -2,6 +2,7 @@ import random
 import backgrounddicts
 import charclasses
 import heritage
+from weaponlist import weaponlist
 
 
 class Character:
@@ -27,9 +28,14 @@ class Character:
         self.set_hp()
         # self.abilities = []
         # self.abilities.append(self.background['feature'])
+        self.armor = []
+        self.armorclass = 0
+        self.get_armor()
+        self.weapons = {}
+        self.get_weapons()
         self.equipment = {}
         self.get_equipment()
-        # self.gear = (self.background['equipment'])
+        
 
     def __repr__(self):
 
@@ -103,7 +109,49 @@ class Character:
         
         for item, quantity in backgrounddicts.bgds[self.background]['equipment'].items():
             self.equipment[item] = quantity
+        for item, quantity in charclasses.classes[self.charclass]['equipment'].items():
+            self.equipment[item] = quantity
+        for item in self.armor:
+            self.equipment[item] = 1
+       
         print(self.equipment)
+
+    def get_weapons(self):
+        # Store weapons in self
+        if len(charclasses.classes[self.charclass]['weapons']) != 0:
+            for item in charclasses.classes[self.charclass]['weapons']:
+                self.weapons.append(item)
+            
+        
+            
+
+
+    def get_armor(self):
+        # Check class for any armor provided
+        armors = {
+            'Leather Armor': 11,
+            "Studded Leather Armor": 12,
+            "Hide": 12,
+            "Chain Shirt": 13,
+            "Scale Mail": 14,
+            "Breastplate": 14,
+            "Half Plate": 15,
+            "Chain Mail": 16,
+            "Shield": 2 
+        }
+
+        # Add equipped armor to Armor Class
+        if len(charclasses.classes[self.charclass]['armor']) != 0:
+            for item in charclasses.classes[self.charclass]['armor']:
+                self.armorclass += armors[item]
+                self.armor.append(item)
+            self.armorclass += self.stats["DEXmod"]
+        if self.charclass == "Monk":
+            self.armorclass = max(self.armorclass, (10 + self.stats["DEXmod"] + self.stats["WISmod"]))
+        if self.charclass == "Barbarian":
+            self.armorclass = max(self.armorclass, (10 + self.stats["DEXmod"] + self.stats["CONmod"]))
+
+
 
     def roll_stats(self, stats):
         # uses random to roll for stats

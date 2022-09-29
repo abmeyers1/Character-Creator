@@ -52,7 +52,8 @@ def process(character):
                         "CHamod": int(character.stats["CHAmod"]) ,
                         "ST Charisma": int(character.saves["CHA"]),
 
-                        
+                        # Armor Class
+                        "AC" : int(character.armorclass)
                         }
                     
     )
@@ -76,7 +77,7 @@ def process(character):
         if item == 'Gold':
             gold += int(quantity)
         else:
-            equipmentlist += f"{item}\t\t{quantity}\n"
+            equipmentlist += f"{item}\t\tx{quantity}\n"
     writer.update_page_form_field_values(
                     writer.pages[0], 
                     {"Equipment": equipmentlist, 

@@ -9,9 +9,7 @@ TODO:
 - Exporting character aspects into pdf:
     - Skill checkboxes
     - Character features
-    - Equipment
     - Weapons
-    - Armor Class
     - Spells
 - User Interface;
     - Clean up player & character name fields
