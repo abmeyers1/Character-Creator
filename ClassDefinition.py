@@ -31,7 +31,7 @@ class Character:
         self.armor = []
         self.armorclass = 0
         self.get_armor()
-        self.weapons = {}
+        self.weapons = []
         self.get_weapons()
         self.equipment = {}
         self.get_equipment()

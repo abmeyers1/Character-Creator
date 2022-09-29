@@ -1,4 +1,5 @@
 from PyPDF2 import PdfReader, PdfWriter
+from weaponlist import weaponlist
 
 skill_list_STR = ['Athletics' ]
 skill_list_DEX = ['Acrobatics', 'SleightofHand', 'Stealth ']
@@ -83,6 +84,68 @@ def process(character):
                     {"Equipment": equipmentlist, 
                         "GP": gold}  
                 )
+
+    # Process weapons
+    for i in range(len(character.weapons)):
+        # Add first weapon
+        if i == 0:
+            writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn Name":character.weapons[i]}
+            )
+            # Add attack bonus
+            if weaponlist[character.weapons[i]][0] == "STR":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn1 AtkBonus": str(character.stats["STRmod"] + 2), "Wpn1 Damage":weaponlist[character.weapons[i]][1] + "+" + str(character.stats["STRmod"])}
+            )
+            
+            elif weaponlist[character.weapons[i]][0] == "DEX":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn1 AtkBonus": str(character.stats["DEXmod"] + 2), "Wpn1 Damage":weaponlist[character.weapons[i]][1]+ "+" + str(character.stats["DEXmod"])}
+            )
+            elif weaponlist[character.weapons[i]][0] == "VERS":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn1 AtkBonus": "+" + str(max(character.stats["STRmod"],character.stats["DEXmod"])  + 2), "Wpn1 Damage":weaponlist[character.weapons[i]][1]+ "+" + str(max(character.stats["STRmod"],character.stats["DEXmod"]))}
+            )
+        if i == 1:
+            writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn Name 2":character.weapons[i]}
+            )
+            # Add attack bonus
+            if weaponlist[character.weapons[i]][0] == "STR":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn2 AtkBonus ":"+" +  str(character.stats["STRmod"] + 2), "Wpn2 Damage ":weaponlist[character.weapons[i]][1]+ "+" + str(character.stats["STRmod"])}
+            )
+            
+            elif weaponlist[character.weapons[i]][0] == "DEX":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn2 AtkBonus ": "+" + str(character.stats["DEXmod"] + 2), "Wpn2 Damage ":weaponlist[character.weapons[i]][1]+ "+" + str(character.stats["DEXmod"])}
+            )
+            elif weaponlist[character.weapons[i]][0] == "VERS":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn2 AtkBonus ": "+" + str(max(character.stats["STRmod"],character.stats["DEXmod"])  + 2), "Wpn2 Damage ":weaponlist[character.weapons[i]][1]+ "+" + str(max(character.stats["STRmod"],character.stats["DEXmod"]))}
+            )
+        if i == 2:
+            writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn Name 3":character.weapons[i]}
+            )
+            # Add attack bonus
+            if weaponlist[character.weapons[i]][0] == "STR":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn3 AtkBonus  ":"+" +  str(character.stats["STRmod"] + 2), "Wpn3 Damage ":weaponlist[character.weapons[i]][1]+ "+" + str(character.stats["STRmod"])}
+            )
+            
+            elif weaponlist[character.weapons[i]][0] == "DEX":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn3 AtkBonus  ": "+" + str(character.stats["DEXmod"] + 2), "Wpn3 Damage ":weaponlist[character.weapons[i]][1]+ "+" + str(character.stats["DEXmod"])}
+            )
+            elif weaponlist[character.weapons[i]][0] == "VERS":
+                writer.update_page_form_field_values(
+                    writer.pages[0],{"Wpn3 AtkBonus  ": "+" + str(max(character.stats["STRmod"],character.stats["DEXmod"])  + 2), "Wpn3 Damage ":weaponlist[character.weapons[i]][1]+ "+" + str(max(character.stats["STRmod"],character.stats["DEXmod"]))}
+            )
+        
+            
+
+
 
     # write "output" to PyPDF2-output.pdf
     with open(f"./Sheets/{character.char_name}_Level_1.pdf", "wb") as output_stream:

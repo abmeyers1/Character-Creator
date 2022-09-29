@@ -10,6 +10,7 @@ TODO:
     - Skill checkboxes
     - Character features
     - Weapons
+        - Need to account for negative mods?
     - Spells
 - User Interface;
     - Clean up player & character name fields
