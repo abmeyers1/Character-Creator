@@ -27,7 +27,8 @@ class Character:
         self.set_hp()
         # self.abilities = []
         # self.abilities.append(self.background['feature'])
-        # self.gear = {}
+        self.equipment = {}
+        self.get_equipment()
         # self.gear = (self.background['equipment'])
 
     def __repr__(self):
@@ -97,6 +98,12 @@ class Character:
         except KeyError:
             pass
 
+    def get_equipment(self):
+        # check background for any equipment
+        
+        for item, quantity in backgrounddicts.bgds[self.background]['equipment'].items():
+            self.equipment[item] = quantity
+        print(self.equipment)
 
     def roll_stats(self, stats):
         # uses random to roll for stats

@@ -52,9 +52,12 @@ def process(character):
                         "CHamod": int(character.stats["CHAmod"]) ,
                         "ST Charisma": int(character.saves["CHA"]),
 
+                        
                         }
                     
     )
+
+    # Process all proficiency scores
     for i in range(len(skill_list)):
         for skill in skill_list[i]:
             if skill in character.skill_proficiencies:
@@ -65,6 +68,21 @@ def process(character):
                 writer.update_page_form_field_values(
                     writer.pages[0], {skill: character.stats[statlist[i]+'mod']}
                 )
+
+    # Process equipment
+    equipmentlist = ""
+    gold = 0
+    for item, quantity in character.equipment.items():
+        if item == 'Gold':
+            gold += int(quantity)
+        else:
+            equipmentlist += f"{item}\t\t{quantity}\n"
+    writer.update_page_form_field_values(
+                    writer.pages[0], 
+                    {"Equipment": equipmentlist, 
+                        "GP": gold}  
+                )
+
     # write "output" to PyPDF2-output.pdf
     with open(f"./Sheets/{character.char_name}_Level_1.pdf", "wb") as output_stream:
         writer.write(output_stream)
