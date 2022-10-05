@@ -7,7 +7,7 @@ I am developing this tool to allow first time players to create a fully function
  
 TODO: 
 - Exporting character aspects into pdf:
-    - Skill checkboxes
+    - Fix selected skills
     - Character features
     - Weapons
         - Need to account for negative mods?

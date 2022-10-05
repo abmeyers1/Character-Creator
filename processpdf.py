@@ -70,6 +70,13 @@ def process(character):
                 writer.update_page_form_field_values(
                     writer.pages[0], {skill: character.stats[statlist[i]+'mod']}
                 )
+    # Process checkboxes for skills
+    for num in character.skill_checkboxes:
+        writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
+
+    # Process checkboxes for stat saves
+    for num in character.save_checkboxes:
+        writer.update_page_form_field_values(writer.pages[0], {f"Check Box {num}":"/Yes"})
 
     # Process equipment
     equipmentlist = ""
@@ -97,7 +104,6 @@ def process(character):
                 writer.update_page_form_field_values(
                     writer.pages[0],{"Wpn1 AtkBonus": str(character.stats["STRmod"] + 2), "Wpn1 Damage":weaponlist[character.weapons[i]][1] + "+" + str(character.stats["STRmod"])}
             )
-            
             elif weaponlist[character.weapons[i]][0] == "DEX":
                 writer.update_page_form_field_values(
                     writer.pages[0],{"Wpn1 AtkBonus": str(character.stats["DEXmod"] + 2), "Wpn1 Damage":weaponlist[character.weapons[i]][1]+ "+" + str(character.stats["DEXmod"])}
@@ -106,6 +112,7 @@ def process(character):
                 writer.update_page_form_field_values(
                     writer.pages[0],{"Wpn1 AtkBonus": "+" + str(max(character.stats["STRmod"],character.stats["DEXmod"])  + 2), "Wpn1 Damage":weaponlist[character.weapons[i]][1]+ "+" + str(max(character.stats["STRmod"],character.stats["DEXmod"]))}
             )
+            
         if i == 1:
             writer.update_page_form_field_values(
                     writer.pages[0],{"Wpn Name 2":character.weapons[i]}

@@ -1,6 +1,7 @@
 import random
 import backgrounddicts
 import charclasses
+from find_checks import fill_save_check, fill_skill_check, check_map
 import heritage
 from weaponlist import weaponlist
 
@@ -20,6 +21,8 @@ class Character:
         self.tool_proficiencies = []
         self.weapon_proficiencies = []
         self.armor_proficiencies = []
+        self.save_checkboxes = []            # Used for checking proficiencies
+        self.skill_checkboxes = []
         self.set_proficiencies()
         self.stats = {"STR": 0, "DEX": 0, "CON": 0, "INT": 0, "WIS": 0, "CHA": 0}
         self.saves = {"STR": 0, "DEX": 0, "CON": 0, "INT": 0, "WIS": 0, "CHA": 0}
@@ -64,6 +67,8 @@ class Character:
             # save = stat mod. If save is in class saves, += 2.
             if stat in charclasses.classes[self.charclass]['saving_throws']:
                 self.saves[stat] = 2 + self.stats[stat+'mod']
+                # Add the appropriate checkbox to list to check off.
+                fill_save_check(stat, self.save_checkboxes)
             else:
                 self.saves[stat] = self.stats[stat+ 'mod']
         
@@ -79,6 +84,8 @@ class Character:
                 if count != 0:
                     for item in source['skill proficiencies']:
                         self.skill_proficiencies.append(item)
+                        # Add appropriate checkbox for each proficient skill
+                        fill_skill_check(item, self.skill_checkboxes)
             if len(source['tool proficiencies']) != 0:
                 for item in source['tool proficiencies']:
                     self.tool_proficiencies.append(item)
@@ -122,10 +129,6 @@ class Character:
             for item in charclasses.classes[self.charclass]['weapons']:
                 self.weapons.append(item)
             
-        
-            
-
-
     def get_armor(self):
         # Check class for any armor provided
         armors = {
@@ -150,8 +153,6 @@ class Character:
             self.armorclass = max(self.armorclass, (10 + self.stats["DEXmod"] + self.stats["WISmod"]))
         if self.charclass == "Barbarian":
             self.armorclass = max(self.armorclass, (10 + self.stats["DEXmod"] + self.stats["CONmod"]))
-
-
 
     def roll_stats(self, stats):
         # uses random to roll for stats
@@ -178,7 +179,7 @@ class Character:
         else:
             print("RECOMMENDED ROLLS!")
             
-            print(backgrounddicts.bgds[self.background])
+            # print(backgrounddicts.bgds[self.background])
             self.stats['STR'] = charclasses.classes[self.charclass]['stat_rec'][0]
             self.stats['DEX'] = charclasses.classes[self.charclass]['stat_rec'][1]
             self.stats['CON'] = charclasses.classes[self.charclass]['stat_rec'][2]
@@ -193,7 +194,6 @@ class Character:
               + str(self.stats['WIS']) + '\nCHA: ' +str(self.stats['CHA']) )
         
         # Add heritage bonuses to stats
-        print(type(heritage.heritages[self.heritage]['stat_bonus']))
         for key, value in heritage.heritages[self.heritage]['stat_bonus'].items():
             self.stats[key] += value
 

@@ -2,7 +2,7 @@ from tkinter import *
 import backgrounddicts
 import heritage
 import charclasses
-import ClassDefinition
+from ClassDefinition import Character
 from processpdf import process
 
 root = Tk()
@@ -16,7 +16,7 @@ root.geometry('600x500')
 def result():
     # First Confirm that all info is in place
     try:
-        new_char = ClassDefinition.Character(character_name.get(),  player_name.get(), char_class.get(),
+        new_char = Character(character_name.get(),  player_name.get(), char_class.get(),
                                              background.get(), h.get(), stats.get())
         # print(new_char)
     except KeyError:

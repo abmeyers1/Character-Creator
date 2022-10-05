@@ -21,29 +21,59 @@
 36- persuasion
 37- religion
 38 - sleight of hand
-39- stealth
+39 - stealth
 40 -  survival
-
-
-
-# 309
+# 309 Spell stuff
 # 3010 - 3083 
 """
-from PyPDF2 import PdfReader, PdfWriter
 
-for i in range (11,41):
-    reader = PdfReader("5E_CharacterSheet_Fillable.pdf")
-    writer = PdfWriter()
+check_map = {
+    "STR":11,
+    "DEX":18,
+    "CON":19,
+    "INT":20,
+    "WIS":21,
+    "CHA":22,
+    "Acrobatics":23,
+    "Animal Handling":24,
+    "Arcana":25,
+    "Athletics":26,
+    "Deception":27,
+    "History":28,
+    "Insight":29,
+    "Intimidation":30,
+    "Investigation":31,
+    "Medicine":32,
+    "Nature": 33,
+    "Perception":34,
+    "Performance":35,
+    "Persuasion":36,
+    "Religion": 37,
+    "Sleight of Hand": 38,
+    "Stealth":39,
+    "Survival":40
+}
 
-    page = reader.pages[0]
-    fields = reader.get_fields()
+def fill_save_check(stat, lst):
+    lst.append(check_map[stat])
 
-    writer.add_page(page)
+def fill_skill_check(skill, lst):
+    lst.append(check_map[skill])
 
-    writer.update_page_form_field_values(
-        writer.pages[0], {f"Check Box {i}":"/Yes"}
-    )
 
-    with open(f"./Checks/Checkbox_{i}.pdf", "wb") as output_stream:
-        writer.write(output_stream)
+# for i in range (11,41):
+#     reader = PdfReader("5E_CharacterSheet_Fillable.pdf")
+#     writer = PdfWriter()
+
+#     page = reader.pages[0]
+#     fields = reader.get_fields()
+
+#     writer.add_page(page)
+
+#     writer.update_page_form_field_values(
+#         writer.pages[0], {f"Check Box {i}":"/Yes"}
+#     )
+
+#     with open(f"./Checks/Checkbox_{i}.pdf", "wb") as output_stream:
+#         writer.write(output_stream)
     
